@@ -1,0 +1,90 @@
+{
+    "all": [
+        "ACE",
+        "BODYBLOCK",
+        "Rawdog",
+        "Accidental teamkill",
+        "tirilnade",
+        "CS2 bug",
+        "\"DU HAR BOMBEN\"",
+        "A snake eating its own tail indicates that its excrement provides food for it",
+        "\"MORRAPULER\"",
+        "\"KLASKER\"",
+        "\"HÆ? Er jeg den eneste igjen?\"",
+        "Noen blir knifa",
+        "Noen blir zeusa",
+        "Noen caller cheats",
+        "Match win",
+        "Noen klager på luckshots",
+        "Noen caller hacks",
+        "Ace steal (noen tar siste kill)",
+        "comeback fra 6+ losses under mostanderen",
+        "\"Du så han\"",
+        "\"Du hørte han\"",
+        "Accidental teamflash",
+        "Noen suicider"
+    ],
+    "parameterized": [
+        "{} acer",
+        "{} clutcher",
+        "{} blir knifa",
+        "{} knifer noen",
+        "{} zeuser noen",
+        "{} topfragger",
+        "{} bottomfragger",
+        "{} 1deager"
+    ],
+    "markus": [
+        "Markus bommer lineup",
+        "Markus finner på excuse for at han suger",
+        "Markus prater om spray transfers"
+    ],
+    "helen": [
+        "Lille skløtte",
+        "Henrik tar over",
+        "Helen deafener seg selv"
+    ],
+    "hanna": [
+        "Hanna tror hun spiller valo"
+    ],
+    "leander": [
+        "Leander bommer et lett awp shot",
+        "Leander er for redd for å bli hørt av fienden",
+        "Leander accidentally hopper når han skyter noen"
+    ],
+    "petter": [
+        "Petter roper NÆÆÆÆÆÆÆIIIII",
+        "Petter topfragger"
+    ],
+    "tita": [
+        "Tita får >2 kills i en runde",
+        "Tita snur ryggen til en fiende"
+    ],
+    "thea": [
+        "Thea får run n gun headshots med m4a1s",
+        "Thea prøver å banne overpass"
+    ],
+    "stash": [
+        "Stash thrower clutchen"
+    ],
+    "mathias": [
+        "Mathias får mer enn 2 kills med xm",
+        "Mathias spiller cs2"
+    ],
+    "seb": [
+        "Seb kjøper shotgun",
+        "Seb ignorerer strat og løper alene inn på en site"
+    ],
+    "kristoffer": [
+        "Kristoffer baiter oss bare for å ninja defuse",
+        "Kristoffer ninja defuser",
+        "Kristoffer caller strat"
+    ],
+    "sven": [
+        "Sven spiller CS2"
+    ],
+    "randoms": [
+        "Vi får en russer på laget"
+    ]
+
+}
