@@ -1,107 +1,16 @@
+import json
 import cv2
 import random
 import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+from sys import argv
 
 IMGPATH = "blank_sheet.png"
 
-cells = {
-    "all": [
-        "ACE",
-        "BODYBLOCK",
-        "Rawdog",
-        "Accidental teamkill",
-        "tirilnade",
-        "CS2 bug",
-        "\"DU HAR BOMBEN\"",
-        "A snake eating its own tail indicates that its excrement provides food for it",
-        "\"MORRAPULER\"",
-        "\"KLASKER\"",
-        "\"HÆ? Er jeg den eneste igjen?\"",
-        "Noen blir knifa",
-        "Noen blir zeusa",
-        "Noen caller cheats",
-        "Match win",
-        "Noen klager på luckshots",
-        "Noen caller hacks",
-        "Ace steal (noen tar siste kill)",
-        "comeback fra 6+ losses under mostanderen",
-        "\"Du så han\"",
-        "\"Du hørte han\"",
-        "Accidental teamflash",
-        "Noen suicider",
-    ],
-    "parameterized": [
-        "{} acer",
-        "{} clutcher",
-        "{} blir knifa",
-        "{} knifer noen",
-        "{} zeuser noen",
-        "{} topfragger",
-        "{} bottomfragger",
-        "{} 1deager",
-    ],
-    "markus": [
-        "Markus bommer lineup",
-        "Markus finner på excuse for at han suger",
-        "Markus prater om spray transfers",
-    ],
-    "helen": [
-        "Lille skløtte",
-        "Henrik tar over",
-        "Helen deafener seg selv",
-    ],
-    "hanna": [
-        "Hanna tror hun spiller valo",
-    ],
-    "leander": [
-        "Leander bommer et lett awp shot",
-        "Leander er for redd for å bli hørt av fienden",
-        "Leander accidentally hopper når han skyter noen",
-    ],
-    "petter": [
-        "Petter roper NÆÆÆÆÆÆÆIIIII",
-        "Petter topfragger",
-    ],
-    "tita": [
-        "Tita får >2 kills i en runde",
-        "Tita snur ryggen til en fiende",
-    ],
-    "thea": [
-        "Thea får run n gun headshots med m4a1s",
-        "Thea prøver å banne overpass",
-    ],
-    "stash": [
-        "Stash thrower clutchen",
-    ],
-    "mathias": [
-        "Mathias får mer enn 2 kills med xm",
-        "Mathias spiller cs2",
-    ],
-    "seb": [
-        "Seb kjøper shotgun",
-        "Seb ignorerer strat og løper alene inn på en site",
-    ],
-    "kristoffer": [
-        "Kristoffer baiter oss bare for å ninja defuse",
-        "Kristoffer ninja defuser",
-        "Kristoffer caller strat",
-    ],
-    "sven": [
-        "Sven spiller CS2",
-    ],
-    "randoms": [
-        "Vi får en russer på laget",
-    ]
 
-}
+with open("cells.json") as f:
+    cells = json.load(f)
 
-import cv2
-
-import cv2
-
-import cv2
-from PIL import Image, ImageDraw, ImageFont
-import numpy as np
 
 def put_text_in_box(image, text, top_left, bottom_right, font_path, font_size=20, color=(0, 0, 0)):
     """
@@ -167,7 +76,7 @@ def sample_cells(players: list[str]) -> dict[str, list[str]]:
     for player in players:
         other_players = players.copy()
         other_players.remove(player)
-        player_space = default_space + [i for player in players for i in cells[player] if player in cells]
+        player_space = default_space + [i for op in other_players for i in cells.get(op, [])]
         other_players.append("du")
         player_space += [s.format(random.choice(other_players)) for s in cells["parameterized"]]
 
@@ -211,65 +120,18 @@ def generate_sheet(sample_space: list, image: np.ndarray):
             put_text_in_box(
                 sliced, sample_space.pop(), (i*width+1, j*width+1), ((i+1)*width, (j+1)*width), font_path="/mnt/c/Windows/Fonts/comic.ttf"
             )
-            # tile = sliced[i*width:(i+1)*width, j*width: (j+1)*width]
-    # for i in range(0, 5):
-    #     for j in range(0, 5):
-    #         width = 123
-    #         index = random.randint(0, len(patches)-1)
-    #         tile = patches.pop(index)
-    #         sliced[i*width:(i+1)*width, j*width: (j+1)*width] = tile
 
     return image
 
-def clear_sheet(path):
-    image = cv2.imread(path)
 
-    start = 8, 294
-    end = 625, 910
+def main():
+    if len(argv) < 2:
+        raise ValueError("You have to supply players separated by a comma. example: python generate_sheets.py player1,player2,player3")
 
-    sliced = image[295:910, 10:625]
-    patches = []
-
-    # for i in range(0, 5):
-    #     for j in range(0, 5):
-    #         width = 123
-    #         tile = sliced[i*width:(i+1)*width, j*width: (j+1)*width].copy()
-    #         patches.append(tile)
-
-    for i in range(0, 5):
-        for j in range(0, 5):
-            width = 123
-            sliced[i*width+i:(i+1)*width, j*width+j: (j+1)*width] = 255
-
-    cv2.imwrite(f"CLEARED_{path}", image)
+    players = argv[1]
+    players = players.split(",")
+    generate_sheets(players)
 
 
-
-# def generate_sheet(path):
-#     image = cv2.imread(path)
-
-#     start = 8, 294
-#     end = 625, 910
-
-#     sliced = image[295:910, 10:625]
-#     patches = []
-
-#     for i in range(0, 5):
-#         for j in range(0, 5):
-#             width = 123
-#             tile = sliced[i*width:(i+1)*width, j*width: (j+1)*width].copy()
-#             patches.append(tile)
-
-#     for i in range(0, 5):
-#         for j in range(0, 5):
-#             width = 123
-#             index = random.randint(0, len(patches)-1)
-#             tile = patches.pop(index)
-#             sliced[i*width:(i+1)*width, j*width: (j+1)*width] = tile
-
-#     return image
-
-
-generate_sheets(
-    ["markus", "sven"]
-)
+if __name__ == "__main__":
+    main()
